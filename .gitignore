@@ -1,0 +1,17 @@
+# vscode
+.vscode
+
+# project files
+app/credentials.php
+app/components/Datenschutzerklärung.html
+app/components/Impressum.html
+
+# non project files
+app/uploads/*
+
+# composer files
+vendor/
+
+# temp ignored
+tests/CalculatorTest.php
+app/Calculator.php
