@@ -17,7 +17,7 @@ if (isset($_SESSION['user'])) {
   <link rel="shortcut icon" type="image/x-icon" href="assets/v2.png">
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <div class="navbar-brand">
       <ul class="navbar-nav mx-auto">
