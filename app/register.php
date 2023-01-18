@@ -1,6 +1,5 @@
 <?php
 
-
 require_once('./components/navbar.php');
 
 if (isset($_SESSION['user'])) {
@@ -31,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="utf-8">
   <title>Registrieren - Erudita</title>
-  
+
 </head>
 
 <body>

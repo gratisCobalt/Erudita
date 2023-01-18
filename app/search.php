@@ -1,6 +1,5 @@
 <?php
 
-
 require_once('./components/navbar.php');
 
 $query = htmlspecialchars($_GET['query']);

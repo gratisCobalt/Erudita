@@ -1,6 +1,5 @@
 <?php
 
-
 require_once('./components/navbar.php');
 
 if (isset($_SESSION['user'])) {
