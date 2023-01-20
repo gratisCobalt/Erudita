@@ -59,7 +59,6 @@ if (isset($_SESSION['user'])) {
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="profile.php">Profil</a>
-            <a class="dropdown-item" href="settings.php">Settings</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </li>
