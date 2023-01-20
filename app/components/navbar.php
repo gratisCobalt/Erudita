@@ -65,7 +65,7 @@ if (isset($_SESSION['user'])) {
         </li>
       <?php else: ?>
         <li class="nav-item">
-          <a class="nav-link" href="login.php">Login</a>
+          <a class="nav-link" href="login.php">Sign In</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="register.php">Sign Up</a>

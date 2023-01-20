@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container mt-5">
         <div class="px-4 py-5 my-5 text-center">
-            <h1 class="display-5 fw-bold"><span class="text-warning">Login</span></h1>
+            <h1 class="display-5 fw-bold"><span class="text-warning">Sign In</span></h1>
             <div class="col-lg-6 mx-auto">
                 <p class="lead mb-4">Here at <span class="text-warning">Erudita</span>, we value your security and privacy. That's why we have implemented a secure login system to protect your personal information and ensure that only you have access to your account.
                 </p>
