@@ -5,6 +5,7 @@ require_once('functions.php');
 require_once('bootstrap.php');
 require_once('scrollbar.php');
 
+
 session_start();
 
 if (isset($_SESSION['user'])) {
@@ -73,3 +74,4 @@ if (isset($_SESSION['user'])) {
     </ul>
   </div>
 </nav>
+

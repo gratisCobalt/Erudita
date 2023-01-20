@@ -3,8 +3,8 @@
 
 # project files
 app/credentials.php
-app/components/Datenschutzerklärung.html
-app/components/Impressum.html
+app/Datenschutzerklärung.html
+app/Impressum.html
 
 # non project files
 app/uploads/*
