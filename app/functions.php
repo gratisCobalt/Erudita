@@ -192,4 +192,12 @@ function isValidCategoryId($category_id)
   return $stmt->rowCount() === 1;
 }
 
+function getMessages()
+{
+  global $pdo;
+
+  $stmt = $pdo->prepare("SELECT * FROM messages ORDER BY id ASC");
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
