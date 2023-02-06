@@ -211,4 +211,21 @@ function updateArticle($article_id, $title, $content, $cover_image_name, $author
   $stmt->execute();
 }
 
+function getMessages()
+{
+  global $pdo;
+
+  $stmt = $pdo->prepare("SELECT * FROM messages ORDER BY id ASC");
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+function sendMessages($sender, $content)
+{
+  global $pdo;
+  
+  $stmt = $pdo->prepare("INSERT INTO messages (id, author_id, content, created_at) VALUES (DEFAULT, $sender, '$content', DEFAULT)");
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ?>
