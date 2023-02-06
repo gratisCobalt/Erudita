@@ -9,6 +9,12 @@ if (!isset($_SESSION['user'])) {
 
 $messages = getMessages();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $author_id = getUser($_SESSION['user'])['id'];
+  $msgContent = htmlspecialchars($_POST['msgContent']);
+sendMessages($author_id, $msgContent);
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -48,5 +54,28 @@ $messages = getMessages();
 </body>
 
 <?php require_once('./components/footer.php'); ?>
+
+<script>
+
+    // Aktualisiere nur den Div "chatbox" - Funktion
+    function reloadChat() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("chatbox").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "./ajax.php", true);
+      xhttp.send();
+
+    }
+
+    // Chatbox aktualisieren - Intervall
+    setInterval(function() {
+      reloadChat();
+    }, 250);
+
+
+</script>
 
 </html>
