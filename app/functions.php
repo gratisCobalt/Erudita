@@ -192,6 +192,25 @@ function isValidCategoryId($category_id)
   return $stmt->rowCount() === 1;
 }
 
+function updateArticle($article_id, $title, $content, $cover_image_name, $author_id, $category_id)
+{
+  global $pdo;
+
+  // Prepare the update statement
+  $stmt = $pdo->prepare("UPDATE articles SET title = :title, content = :content, cover_image_url = :cover_image_url, author_id = :author_id, category_id = :category_id WHERE id = :id");
+
+  // Bind the parameters
+  $stmt->bindParam(':title', $title);
+  $stmt->bindParam(':content', $content);
+  $stmt->bindParam(':cover_image_url', $cover_image_name);
+  $stmt->bindParam(':author_id', $author_id);
+  $stmt->bindParam(':category_id', $category_id);
+  $stmt->bindParam(':id', $article_id);
+
+  // Execute the statement
+  $stmt->execute();
+}
+
 function getMessages()
 {
   global $pdo;
@@ -208,4 +227,5 @@ function sendMessages($sender, $content)
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 ?>

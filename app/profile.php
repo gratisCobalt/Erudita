@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="password" class="form-control form-control-sm" name="password_repeat" id="password_repeat">
       </div>
 
-      <button type="submit" class="btn btn-danger btn-sm">Aktualisieren</button>
+      <button type="submit" class="btn btn-warning btn-sm">Aktualisieren</button>
     </form>
 
     <div class="container mt-3">
