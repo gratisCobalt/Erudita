@@ -34,14 +34,29 @@ require_once('./components/navbar.php');
         </div>
 
         <div class="container my-5">
-            <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 shadow">
-                <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                    <h1 class="display-4">Who are we?</h1>
-                    <p class="lead">We are a group of students from the IU International University of Applied Science.
-                    </p>
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 shadow">
+        <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4">Who are we?</h1>
+            <p class="lead">We are a group of students from the IU International University of Applied Science.
+            </p>
+            <h2 class="display-4">Our team members:</h2>
+            <div class="row">
+                <div class="col-lg-3">
+                    <img src="./assets/member1.png" class="img-fluid rounded-circle mx-auto d-block" alt="member1">
+                    <p class="text-center mt-2">Kevin Tamme</p>
+                </div>
+                <div class="col-lg-3">
+                    <img src="./assets/member2.png" class="img-fluid rounded-circle mx-auto d-block" alt="member2">
+                    <p class="text-center mt-2">Rares Velnic</p>
+                </div>
+                <div class="col-lg-3">
+                    <img src="./assets/member3.png" class="img-fluid rounded-circle mx-auto d-block" alt="member3">
+                    <p class="text-center mt-2">Dominik Hein</p>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
         <div class="container my-5">
             <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 shadow">
