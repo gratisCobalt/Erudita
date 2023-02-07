@@ -77,5 +77,4 @@ sendMessages($author_id, $msgContent);
 
 
 </script>
-
 </html>

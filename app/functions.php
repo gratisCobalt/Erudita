@@ -222,7 +222,7 @@ function getMessages()
 function sendMessages($sender, $content)
 {
   global $pdo;
-  
+
   $stmt = $pdo->prepare("INSERT INTO messages (id, author_id, content, created_at) VALUES (DEFAULT, $sender, '$content', DEFAULT)");
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);

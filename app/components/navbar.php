@@ -38,6 +38,9 @@ if (isset($_SESSION['user'])) {
           <li class="nav-item">
             <a class="nav-link" href="create.php">Erstellen</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="chat.php">Chat</a>
+          </li>
         <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link" href="about.php">Über uns</a>
