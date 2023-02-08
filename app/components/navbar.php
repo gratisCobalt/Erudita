@@ -32,18 +32,18 @@ if (isset($_SESSION['user'])) {
           <a class="nav-link" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="categories.php">Kategorien</a>
+          <a class="nav-link" href="categories.php">Categories</a>
         </li>
         <?php if (isset($_SESSION['user'])): ?>
           <li class="nav-item">
-            <a class="nav-link" href="create.php">Erstellen</a>
+            <a class="nav-link" href="edit.php">Create</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="chat.php">Chat</a>
           </li>
         <?php endif; ?>
         <li class="nav-item">
-          <a class="nav-link" href="about.php">Über uns</a>
+          <a class="nav-link" href="about.php">About</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="faq.php">FAQ</a>
@@ -61,7 +61,7 @@ if (isset($_SESSION['user'])) {
             <?php echo htmlspecialchars($user['username']); ?>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="profile.php">Profil</a>
+            <a class="dropdown-item" href="profile.php">Profile</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </li>
@@ -76,4 +76,3 @@ if (isset($_SESSION['user'])) {
     </ul>
   </div>
 </nav>
-

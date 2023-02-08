@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="row">
       <div class="col-md-12">
-        <h1 id="heading" class="mb-4">Registrieren</h1>
+        <h1 id="heading" class="mb-4">Register</h1>
         <?php if (isset($error)): ?>
           <div class="alert alert-danger"><?php echo $error; ?></div>
         <?php endif; ?>
@@ -56,17 +56,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               required>
           </div>
           <div class="form-group">
-            <label for="first_name">Prename</label>
+            <label for="first_name">First name</label>
             <input type="text" class="form-control" name="first_name" id="first_name"
               placeholder="Please enter your first name" required>
           </div>
           <div class="form-group">
-            <label for="last_name">Surname</label>
+            <label for="last_name">Last name</label>
             <input type="text" class="form-control" name="last_name" id="last_name"
               placeholder="Please enter your last name" required>
           </div>
           <div class="form-group">
-            <label for="email">E-Mail</label>
+            <label for="email">E-mail</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="Please provide your email"
               required>
           </div>

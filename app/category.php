@@ -13,12 +13,12 @@ $articles = getArticlesFromCategory($_GET['id']);
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Artikel Übersicht</title>
+    <title>Overview articles</title>
 </head>
 
 <body>
     <div class="container mt-5">
-        <h1 class="text-center mb-5">Kategorie:
+        <h1 class="text-center mb-5">Category:
             <span class="text-warning">
                 <?php echo getCategoryByID($_GET['id'])['name'] ?>
             </span>
