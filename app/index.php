@@ -137,8 +137,8 @@ $articles = getArticles();
   </div>
 
   <?php require_once('./components/footer.php'); ?>
-  <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-  <div class="elfsight-app-43131585-678d-4400-acd2-7f5f22620c11"></div>
+  <!-- <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+  <div class="elfsight-app-43131585-678d-4400-acd2-7f5f22620c11"></div> -->
 </body>
 
 </html>
