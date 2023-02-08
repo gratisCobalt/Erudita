@@ -66,6 +66,8 @@ function updateUser($username, $email, $firstname, $lastname, $password)
 
 function register($username, $email, $password, $password_repeat, $first_name, $last_name)
 {
+  $default_user_image = './assets/default-users.jpg';
+
   // Validate input
   if (empty($username) || empty($email) || empty($password) || empty($password_repeat)) {
     return false;
@@ -90,8 +92,8 @@ function register($username, $email, $password, $password_repeat, $first_name, $
 
   // Insert new user into database
   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-  $stmt = $pdo->prepare("INSERT INTO users (username, email, password, first_name, last_name) VALUES (?, ?, ?, ?, ?)");
-  $stmt->execute([$username, $email, $hashed_password, $first_name, $last_name]);
+  $stmt = $pdo->prepare("INSERT INTO users (username, email, password, first_name, last_name, profile_image) VALUES (?, ?, ?, ?, ?, ?)");
+  $stmt->execute([$username, $email, $hashed_password, $first_name, $last_name, $default_user_image]);
 
   return true;
 }
@@ -163,6 +165,7 @@ function getCategories()
 
   $stmt = $pdo->prepare("SELECT * FROM categories ORDER BY name ASC");
   $stmt->execute();
+
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -173,22 +176,37 @@ function getArticlesFromCategory($category_id)
   $stmt = $pdo->prepare('SELECT * FROM articles WHERE category_id = :category_id');
   $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
   $stmt->execute();
+
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function isValidAuthorId($author_id)
 {
   global $pdo;
+
   $stmt = $pdo->prepare("SELECT id FROM users WHERE id = ?");
   $stmt->execute([$author_id]);
+
   return $stmt->rowCount() === 1;
 }
 
 function isValidCategoryId($category_id)
 {
   global $pdo;
+
   $stmt = $pdo->prepare("SELECT id FROM categories WHERE id = ?");
   $stmt->execute([$category_id]);
+
+  return $stmt->rowCount() === 1;
+}
+
+function isValidArticleId($article_id)
+{
+  global $pdo;
+
+  $stmt = $pdo->prepare("SELECT id FROM articles WHERE id = ?");
+  $stmt->execute([$article_id]);
+
   return $stmt->rowCount() === 1;
 }
 
@@ -211,6 +229,24 @@ function updateArticle($article_id, $title, $content, $cover_image_name, $author
   $stmt->execute();
 }
 
+function updateArticleWithoutImage($article_id, $title, $content, $author_id, $category_id)
+{
+  global $pdo;
+
+  // Prepare the update statement
+  $stmt = $pdo->prepare("UPDATE articles SET title = :title, content = :content, author_id = :author_id, category_id = :category_id WHERE id = :id");
+
+  // Bind the parameters
+  $stmt->bindParam(':title', $title);
+  $stmt->bindParam(':content', $content);
+  $stmt->bindParam(':author_id', $author_id);
+  $stmt->bindParam(':category_id', $category_id);
+  $stmt->bindParam(':id', $article_id);
+
+  // Execute the statement
+  $stmt->execute();
+}
+
 function getMessages()
 {
   global $pdo;
@@ -219,13 +255,59 @@ function getMessages()
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 function sendMessages($sender, $content)
 {
   global $pdo;
 
-  $stmt = $pdo->prepare("INSERT INTO messages (id, author_id, content, created_at) VALUES (DEFAULT, $sender, '$content', DEFAULT)");
+  $stmt = $pdo->prepare("INSERT INTO messages (id, author_id, content, created_at) VALUES (DEFAULT, :sender, ':content', DEFAULT)");
+
+  // Bind the parameters
+  $stmt->bindParam(':sender', $sender);
+  $stmt->bindParam(':content', $content);
+
+  // Execute the statement
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function incrementViews($article_id)
+{
+  global $pdo;
+
+  $stmt = $pdo->prepare("UPDATE articles SET views = views + 1 WHERE id = :id");
+
+  // Bind the parameters
+  $stmt->bindParam(':id', $article_id);
+
+  // Execute the statement
+  $stmt->execute();
+}
+
+function deleteAccount($user_id)
+{
+  global $pdo;
+
+  $stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
+
+  // Bind the parameters
+  $stmt->bindParam(':id', $user_id);
+
+  // Execute the statement
+  $stmt->execute();
+}
+
+function deleteArticle($article_id)
+{
+  global $pdo;
+
+  $stmt = $pdo->prepare("DELETE FROM articles WHERE id = :id");
+
+  // Bind the parameters
+  $stmt->bindParam(':id', $article_id);
+
+  // Execute the statement
+  $stmt->execute();
 }
 
 ?>
