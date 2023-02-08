@@ -101,13 +101,15 @@ THE SOFTWARE.
 -->
 <?php
 
+// not neccessary because legal notice already started the session
+// session_start();
+
 require_once('config.php');
 require_once('functions.php');
 require_once('bootstrap.php');
 require_once('scrollbar.php');
 
 
-session_start();
 
 if (isset($_SESSION['user'])) {
   $user = getUser($_SESSION['user']);
