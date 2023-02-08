@@ -1,5 +1,5 @@
 <?php
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function getArticles()
 {
   global $pdo;
@@ -8,7 +8,7 @@ function getArticles()
   $stmt->execute();
   return $stmt->fetchAll();
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function getArticle($id)
 {
   global $pdo;
@@ -17,7 +17,7 @@ function getArticle($id)
   $stmt->execute([$id]);
   return $stmt->fetch();
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function searchArticles($query)
 {
   global $pdo;
@@ -26,7 +26,7 @@ function searchArticles($query)
   $stmt->execute(["%$query%", "%$query%"]);
   return $stmt->fetchAll();
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function createArticle($title, $content, $cover_image_url, $author_id, $category_id)
 {
   global $pdo;
@@ -37,7 +37,7 @@ function createArticle($title, $content, $cover_image_url, $author_id, $category
   // return the ID of the newly created article
   return $pdo->lastInsertId();
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function getUser($username)
 {
   global $pdo;
@@ -46,7 +46,7 @@ function getUser($username)
   $stmt->execute([$username]);
   return $stmt->fetch();
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function updateUser($username, $email, $firstname, $lastname, $password)
 {
   global $pdo;
@@ -63,7 +63,7 @@ function updateUser($username, $email, $firstname, $lastname, $password)
   $stmt->execute([$email, $firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $username]);
   return True;
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function register($username, $email, $password, $password_repeat, $first_name, $last_name)
 {
   // Validate input
@@ -95,7 +95,7 @@ function register($username, $email, $password, $password_repeat, $first_name, $
 
   return true;
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function login($username, $password)
 {
   // Validate input
@@ -124,7 +124,7 @@ function login($username, $password)
   $_SESSION['user'] = $username;
   return true;
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function getUserByID($id)
 {
   // Sanitize the input to prevent SQL injection attacks
@@ -140,7 +140,7 @@ function getUserByID($id)
   // Benutzer aus der Datenbank abrufen
   return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function getCategoryByID($id)
 {
   // Sanitize the input to prevent SQL injection attacks
@@ -156,7 +156,7 @@ function getCategoryByID($id)
   // Kategorie aus der Datenbank abrufen
   return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function getCategories()
 {
   global $pdo;
@@ -165,7 +165,7 @@ function getCategories()
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function getArticlesFromCategory($category_id)
 {
   global $pdo;
@@ -175,7 +175,7 @@ function getArticlesFromCategory($category_id)
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function isValidAuthorId($author_id)
 {
   global $pdo;
@@ -183,7 +183,7 @@ function isValidAuthorId($author_id)
   $stmt->execute([$author_id]);
   return $stmt->rowCount() === 1;
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function isValidCategoryId($category_id)
 {
   global $pdo;
@@ -191,7 +191,7 @@ function isValidCategoryId($category_id)
   $stmt->execute([$category_id]);
   return $stmt->rowCount() === 1;
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function updateArticle($article_id, $title, $content, $cover_image_name, $author_id, $category_id)
 {
   global $pdo;
@@ -210,7 +210,7 @@ function updateArticle($article_id, $title, $content, $cover_image_name, $author
   // Execute the statement
   $stmt->execute();
 }
-
+// Zugriff auf Funktionen von [php 8.1.3]
 function getMessages()
 {
   global $pdo;
@@ -219,6 +219,7 @@ function getMessages()
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+// Zugriff auf Funktionen von [php 8.1.3]
 function sendMessages($sender, $content)
 {
   global $pdo;
