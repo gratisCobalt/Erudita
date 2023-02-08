@@ -17,7 +17,7 @@ require_once('./components/navbar.php');
 <body>
 <div class="container my-5">
     <div class="px-4 py-5 my-5 text-center">
-        <img class="d-clock mx-auto mb-4" src="./assets/v2_round.png" alt="" width="72" height="57">
+        <img class="d-clock mx-auto mb-4" src="./assets/v2_round.png" alt="" width="96" height="96">
         <h1 class="display-4 text-center mb-5">Frequently Asked Questions</h1>
     <div id="accordion" class="mt-5">
         <div class="card">
