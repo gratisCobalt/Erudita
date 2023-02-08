@@ -25,6 +25,12 @@ LICENSE OF THIS PROJECT
   Copyright 2023 Kevin Tamme, IU University of Applied Sciences, 
   Nordring 53, 63517 Rodenbach, Germany
 
+  Copyright 2023 Dominik Hein, IU University of Applied Sciences, 
+  Am Bobenhäuserweg 9, 63773 Goldbach, Germany
+
+  Copyright 2023 Rares-Constantin Velnic, IU University of Applied Sciences, 
+  Am Melonenberg 6, 65187 Wiesbaden, Germany
+
   The use of this project is only allowed in the context of 
   the lecture to facilitate the understanding of programming 
   techniques. Redistribution and use in source or binary forms, with 
