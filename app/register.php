@@ -1,9 +1,7 @@
-<!-- 
+<!--
 LEGAL NOTICE
 
-  This project serves as a teaching example or sample solution in the 
-  context of teaching, to teach knowledge in software development. 
-  It contains a software solution.
+  This project contains software solution.
 
   Please check the LICENSE OF THIS PROJECT below, to find the license 
   information for this project. This license is just related to the 
@@ -18,18 +16,14 @@ LEGAL NOTICE
   [Apache 2.4 VS16] in connexion with [php 8.1.3].
   [Apache 2.4 VS16] and [php 8.1.3] will not be delivered/distributed 
   as parts of this project. 
-  The project uses elements of [Bootstrap 5.2.3].
-  Furthermore basic functionalities of the operating system
-  Microsoft Windows 10 (Version 10.0.19044.2251) were used
-  in order to create this project. Especially the functionality 
-  of "Microsoft Print to PDF" or the editor "notepad" were used.
+  The project uses elements of [Bootstrap 4.5.3].
   
 LICENSE OF THIS PROJECT
 
   This license bases on [bsd-3] with fundamental modifications:
 
-  Copyright 2022 David Kuhlen, IU University of Applied Sciences, 
-  Waterloohain 9, 22769 Hamburg, Germany
+  Copyright 2023 Kevin Tamme, IU University of Applied Sciences, 
+  Nordring 53, 63517 Rodenbach, Germany
 
   The use of this project is only allowed in the context of 
   the lecture to facilitate the understanding of programming 
@@ -54,35 +48,32 @@ REFERENCES
 
   [bsd-3] Open Source Initiative (n. Y.): "The 3-Clause BSD License". 
      URL: https://opensource.org/licenses/BSD-3-Clause, 
-     accessed 2022-MAR-28.
+     accessed 2023-FEB-07.
   [Apache 2.4 VS16] Apache Lounge powered by Apache (2021): 
      "Apache 2.4 VS16 Windows Binaries and Modules". Version 2.4.52 Win64. 
      Online available at URL: https://www.apachelounge.com/download/, 
-     accessed 2022-MAR-11. 
+     accessed 2023-FEB-07. 
      [License-URL: https://www.apachelounge.com/contact.html].
   [php 8.1.3] The PHP Group (2022): "PHP: Hypertext Preprocessor". 
      Version 8.1.3. Online available at 
-     URL: https://windows.php.net/download/, accessed 2022-MAR-11. 
+     URL: https://windows.php.net/download/, accessed 2023-FEB-07. 
      [License: PHP License v3.01, 
      License-URL: https://www.php.net/license/3_01.txt].
-  [Bootstrap 5.2.3] Mark Otto / Jacob Thornton / XhmikosR / GeoSot / 
+  [Bootstrap 4.5.3] Mark Otto / Jacob Thornton / XhmikosR / GeoSot / 
      Rohit Sharma / alpadev / Gael Poupard / Patrick H. Lauke /
      Martijn Cuppend / Johann-S / Gleb Mazovetskiy (2022): "Bootstrap".
-     Version 5.2.3. Bootstrap is released under the MIT license 
+     Version 4.5.3. Bootstrap is released under the MIT license 
      and is copyright 2022 Twitter. Online available at
-     URL: https://getbootstrap.com/, accessed 2022-DECEMBER-06.
-     [Bootstrap v5.2.3 (https://getbootstrap.com/), 
-     Copyright 2011-2022 The Bootstrap Authors, 
-     Copyright 2011-2022 Twitter, Inc., 
+     URL: https://getbootstrap.com/, accessed 2023-FEB-07.
+     [Bootstrap v4.5.3 (https://getbootstrap.com/), 
+     Copyright 2011-2023 The Bootstrap Authors, 
+     Copyright 2011-2023 Twitter, Inc., 
      Licensed under MIT 
      (https://github.com/twbs/bootstrap/blob/main/LICENSE)].
 
-BOOTSTRAP LICENSE
+BOOTSTRAP 4.5.3 LICENSE
 
-The MIT License (MIT)
-
-Copyright (c) 2011-2022 Twitter, Inc.
-Copyright (c) 2011-2022 The Bootstrap Authors
+Copyright (c) 2011-2023 The Bootstrap Authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
