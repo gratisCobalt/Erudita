@@ -111,7 +111,7 @@ require_once('./components/navbar.php');
 <head>
     <meta charset="utf-8">
     <title>
-        Über uns - Erudita
+        About us - Erudita
     </title>
 </head>
 

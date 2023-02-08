@@ -154,7 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
       <div class="col-md-12">
         <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-        <h1 id="heading" class="mb-4">Registrieren</h1>
+        <h1 id="heading" class="mb-4">Register</h1>
+
         <?php if (isset($error)): ?>
         <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
           <div class="alert alert-danger"><?php echo $error; ?></div>
@@ -169,21 +170,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
           <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
           <div class="form-group">
-            <label for="first_name">Prename</label>
+            <label for="first_name">First name</label>
             <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
             <input type="text" class="form-control" name="first_name" id="first_name"
               placeholder="Please enter your first name" required>
           </div>
           <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
           <div class="form-group">
-            <label for="last_name">Surname</label>
+            <label for="last_name">Last name</label>
             <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
             <input type="text" class="form-control" name="last_name" id="last_name"
               placeholder="Please enter your last name" required>
           </div>
           <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
           <div class="form-group">
-            <label for="email">E-Mail</label>
+            <label for="email">E-mail</label>
             <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
             <input type="email" class="form-control" name="email" id="email" placeholder="Please provide your email"
               required>

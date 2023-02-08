@@ -111,10 +111,10 @@ THE SOFTWARE.
             <div class="col-12 col-md-8 text-center text-md-right">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item mx-3">
-                        <a href="Datenschutzerklärung.html" class="text-muted">Datenschutz</a>
+                        <a href="Datenschutzerklärung.html" class="text-muted">Privacy Policy</a>
                     </li>
                     <li class="list-inline-item mx-3">
-                        <a href="Impressum.html" class="text-muted">Impressum</a>
+                        <a href="Impressum.html" class="text-muted">Legal Notice</a>
                     </li>
                     <li class="list-inline-item mx-3">
                         <a href="faq.php" class="text-muted">FAQ</a>

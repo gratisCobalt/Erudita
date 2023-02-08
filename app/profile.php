@@ -208,6 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <button type="submit" class="btn btn-warning btn-sm">Aktualisieren</button>
+      <a href="logout.php"><button type="button" class="btn btn-danger btn-sm" onclick="<?php deleteAccount($user['id']); ?>">Delete account</button></a>
     </form>
 
     <div class="container mt-3">
