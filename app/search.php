@@ -100,6 +100,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <?php
+
 require_once('./components/navbar.php');
 
 $query = htmlspecialchars($_GET['query']);
