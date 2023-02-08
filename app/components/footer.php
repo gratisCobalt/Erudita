@@ -119,6 +119,9 @@ THE SOFTWARE.
                     <li class="list-inline-item mx-3">
                         <a href="faq.php" class="text-muted">FAQ</a>
                     </li>
+                    <li class="list-inline-item mx-3">
+                        <a href="./legals/Legal_Notice.txt" class="text-muted">Legals</a>
+                    </li>
                 </ul>
             </div>
         </div>
