@@ -178,8 +178,8 @@ $category = $categoryFunctions->getCategoryByID($category_id);
     <div class="row">
       <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
       <div class="col-12 text-center">
-        <img src="<?php echo $cover_image_url; ?>" alt="Cover image" <!-- Bezugnahme auf Design-Elemente von [Bootstrap
-          4.5.3]. -->
+        <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
+        <img src="<?php echo $cover_image_url; ?>" alt="Cover image" 
         class="mb-3 border border-warning rounded p-1 col-md-4">
       </div>
       <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
