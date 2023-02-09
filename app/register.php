@@ -103,7 +103,8 @@
 require_once('./components/navbar.php');
 
 if (isset($_SESSION['user'])) {
-  header('Location: index.php');
+  // header('Location: index.php');
+  echo "<script>window.location.href='index.php'</script>";
   exit;
 }
 
@@ -117,7 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($userFunctions->register($username, $email, $password, $password_repeat, $first_name, $last_name)) {
     $_SESSION['user'] = $username;
-    header('Location: index.php');
+    // header('Location: index.php');
+  echo "<script>window.location.href='index.php'</script>";
     exit;
   } else {
     $error = 'Registrierung fehlgeschlagen';

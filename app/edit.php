@@ -108,7 +108,8 @@ $keyword = $isEditMode ? 'Edit' : 'Create';
 
 if ($isEditMode) {
     if (!$articleFunctions->isValidArticleId($_GET['id'])) {
-        header('Location: index.php');
+        // header('Location: index.php');
+  echo "<script>window.location.href='index.php'</script>";
     }
 }
 
@@ -164,13 +165,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $articleFunctions->updateArticleWithoutImage($article_id, $title, $content, $author_id, $category_id);
             }
 
-            header('Location: article_post.php?id=' . $article_id);
+            echo "<script>window.location.href='article_post.php?id=" . $article_id . "'</script>";
+            // header('Location: article_post.php?id=' . $article_id);
             exit;
         } else {
             // Create article
             $article_id = $articleFunctions->createArticle($title, $content, $cover_image_name, $author_id, $category_id);
 
-            header('Location: article_post.php?id=' . $article_id);
+            echo "<script>window.location.href='article_post.php?id=" . $article_id . "'</script>";
+            // header('Location: article_post.php?id=' . $article_id);
             exit;
         }
     } catch (Exception $e) {
@@ -281,10 +284,14 @@ $categories = $categoryFunctions->getCategories();
                 <?php echo $isEditMode ? 'Update' : 'Create' ?>
             </button>
             <?php
-            if ($isEditMode and strcmp($user['role'], 'admin') == 0) {
-                // <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                echo '<a href="index.php"><button type="button" class="btn btn-danger btn-sm"
-                onclick="<?php $articleFunctions->deleteArticle($_GET[\'id\']); ?>">Delete article</button></a>';
+            if ($isEditMode) {
+                if (isset($user['role'])) {
+                    if (strcmp($user['role'], 'admin') == 0) {
+                        // <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
+                        echo '<a href="index.php"><button type="button" class="btn btn-danger btn-sm"
+                        onclick="' . $articleFunctions->deleteArticle($_GET['id']) . '">Delete article</button></a>';
+                    }
+                }
             }
             ?>
         </form>

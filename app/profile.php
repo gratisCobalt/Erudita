@@ -103,12 +103,14 @@
 require_once('./components/navbar.php');
 
 if (!isset($_SESSION['user'])) {
-  header('Location: login.php');
+  // header('Location: login.php');
+  echo "<script>window.location.href='login.php'</script>";
   exit;
 }
 
 if (!$user) {
-  header('Location: logout.php');
+  // header('Location: logout.php');
+  echo "<script>window.location.href='logout.php'</script>";
   exit;
 }
 
