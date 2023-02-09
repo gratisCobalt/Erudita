@@ -100,35 +100,149 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-?>
+namespace App;
 
-<!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-<div class="card-columns">
-    <?php foreach ($articles as $article): ?>
-        <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-        <div class="card">
-            <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-            <img src="<?php echo $article['cover_image_url']; ?>" class="card-img-top" alt="Cover image">
-            <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-            <div class="card-body">
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <h5 class="card-title">
-                    <?php echo $article['title']; ?>
-                </h5>
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <p class="card-text">Author: <?php echo $userFunctions->getUserByID($article['author_id'])['username']; ?></p>
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <a href="article_post.php?id=<?php echo $article['id']; ?>" class="btn btn-warning">Read more...</a>
-            </div>
-            <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-            <div class="card-footer">
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <span class="badge badge-secondary">
-                    <?php echo $categoryFunctions->getCategoryByID($article['category_id'])['name']; ?>
-                </span>
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <span class="badge badge-secondary"><?php echo $article['views']; ?> views</span>
-            </div>
-        </div>
-    <?php endforeach; ?>
-</div>
+class UserFunctions
+{
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function getUser($username)
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    return $stmt->fetch();
+  }
+
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function updateUser($username, $email, $firstname, $lastname, $password)
+  {
+    global $pdo;
+
+    // sanitize input
+    $username = filter_var($username, FILTER_SANITIZE_STRING);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $firstname = filter_var($firstname, FILTER_SANITIZE_STRING);
+    $lastname = filter_var($lastname, FILTER_SANITIZE_STRING);
+    $password = filter_var($password, FILTER_SANITIZE_STRING);
+
+    // update user in database
+    $stmt = $pdo->prepare("UPDATE users SET email = ?, first_name = ?, last_name = ?, password = ? WHERE username = ?");
+    $stmt->execute([$email, $firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $username]);
+    return True;
+  }
+
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function register($username, $email, $password, $password_repeat, $first_name, $last_name)
+  {
+    $default_user_image = './assets/default-users.jpg';
+
+    // Validate input
+    if (empty($username) || empty($email) || empty($password) || empty($password_repeat)) {
+      return false;
+    }
+    if ($password != $password_repeat) {
+      return false;
+    }
+
+    // Sanitize input
+    $username = htmlspecialchars($username);
+    $email = htmlspecialchars($email);
+    $first_name = htmlspecialchars($first_name);
+    $last_name = htmlspecialchars($last_name);
+
+    // Check if username or email is already in use
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
+    $stmt->execute([$username, $email]);
+    if ($stmt->rowCount() > 0) {
+      return false;
+    }
+
+    // Insert new user into database
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $stmt = $pdo->prepare("INSERT INTO users (username, email, password, first_name, last_name, profile_image) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$username, $email, $hashed_password, $first_name, $last_name, $default_user_image]);
+
+    return true;
+  }
+
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function login($username, $password)
+  {
+    // Validate input
+    if (empty($username) || empty($password)) {
+      return false;
+    }
+
+    // Sanitize input
+    $username = htmlspecialchars($username);
+
+    // Check if username exists in database
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
+    if (!$user) {
+      return false;
+    }
+
+    // Check if password is correct
+    if (!array_key_exists('password', $user)) {
+      return false;
+    }
+    
+    if (!password_verify($password, $user['password'])) {
+      return false;
+    }
+    
+
+    // Set session variables and return true
+    $_SESSION['user'] = $username;
+    return true;
+  }
+
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function getUserByID($id)
+  {
+    // Sanitize the input to prevent SQL injection attacks
+    $id = intval($id);
+
+    global $pdo;
+
+    // Benutzer-ID sicher vorbereiten und ausführen
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');
+    $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Benutzer aus der Datenbank abrufen
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+  }
+
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function isValidAuthorId($author_id)
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE id = ?");
+    $stmt->execute([$author_id]);
+
+    return $stmt->rowCount() === 1;
+  }
+
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function deleteAccount($user_id)
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
+
+    // Bind the parameters
+    $stmt->bindParam(':id', $user_id);
+
+    // Execute the statement
+    $stmt->execute();
+  }
+}
+
+?>

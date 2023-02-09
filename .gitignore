@@ -12,6 +12,5 @@ app/uploads/*
 # composer files
 vendor/
 
-# temp ignored
-tests/CalculatorTest.php
-app/Calculator.php
+# unit tests
+.phpunit.result.cache

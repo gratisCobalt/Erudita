@@ -100,35 +100,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-?>
+namespace App;
 
-<!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-<div class="card-columns">
-    <?php foreach ($articles as $article): ?>
-        <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-        <div class="card">
-            <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-            <img src="<?php echo $article['cover_image_url']; ?>" class="card-img-top" alt="Cover image">
-            <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-            <div class="card-body">
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <h5 class="card-title">
-                    <?php echo $article['title']; ?>
-                </h5>
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <p class="card-text">Author: <?php echo $userFunctions->getUserByID($article['author_id'])['username']; ?></p>
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <a href="article_post.php?id=<?php echo $article['id']; ?>" class="btn btn-warning">Read more...</a>
-            </div>
-            <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-            <div class="card-footer">
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <span class="badge badge-secondary">
-                    <?php echo $categoryFunctions->getCategoryByID($article['category_id'])['name']; ?>
-                </span>
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <span class="badge badge-secondary"><?php echo $article['views']; ?> views</span>
-            </div>
-        </div>
-    <?php endforeach; ?>
-</div>
+class CategoryFunctions
+{
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function getCategoryByID($id)
+  {
+    // Sanitize the input to prevent SQL injection attacks
+    $id = intval($id);
+
+    global $pdo;
+
+    // Kategorie-ID sicher vorbereiten und ausführen
+    $stmt = $pdo->prepare('SELECT * FROM categories WHERE id = :id');
+    $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Kategorie aus der Datenbank abrufen
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+  }
+
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function getCategories()
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT * FROM categories ORDER BY name ASC");
+    $stmt->execute();
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  // Zugriff auf Funktionen von [php 8.1.3]
+  function isValidCategoryId($category_id)
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT id FROM categories WHERE id = ?");
+    $stmt->execute([$category_id]);
+
+    return $stmt->rowCount() === 1;
+  }
+}
+
+?>
