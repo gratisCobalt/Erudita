@@ -100,35 +100,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-?>
+namespace App;
 
-<!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-<div class="card-columns">
-    <?php foreach ($articles as $article): ?>
-        <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-        <div class="card">
-            <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-            <img src="<?php echo $article['cover_image_url']; ?>" class="card-img-top" alt="Cover image">
-            <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-            <div class="card-body">
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <h5 class="card-title">
-                    <?php echo $article['title']; ?>
-                </h5>
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <p class="card-text">Author: <?php echo $userFunctions->getUserByID($article['author_id'])['username']; ?></p>
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <a href="article_post.php?id=<?php echo $article['id']; ?>" class="btn btn-warning">Read more...</a>
-            </div>
-            <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-            <div class="card-footer">
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <span class="badge badge-secondary">
-                    <?php echo $categoryFunctions->getCategoryByID($article['category_id'])['name']; ?>
-                </span>
-                <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
-                <span class="badge badge-secondary"><?php echo $article['views']; ?> views</span>
-            </div>
-        </div>
-    <?php endforeach; ?>
-</div>
+
+class ChatFunctions
+{
+  // Access to functions from [php 8.1.3]
+  function getMessages()
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT * FROM messages ORDER BY id ASC");
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  // Access to functions from [php 8.1.3]
+  function sendMessage($sender, $content)
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("INSERT INTO messages (author_id, content) VALUES (:sender, :content)");
+
+    // Bind the parameters
+    $stmt->bindParam(':sender', $sender);
+    $stmt->bindParam(':content', $content);
+
+    // Execute the statement
+    $stmt->execute();
+  }
+}
+
+?>
