@@ -103,7 +103,8 @@
 require_once('./components/navbar.php');
 
 if (!isset($_SESSION['user'])) {
-  header('Location: index.php');
+  // header('Location: index.php');
+  echo "<script>window.location.href='index.php'</script>";
   exit;
 }
 
