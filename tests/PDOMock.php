@@ -100,161 +100,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-use App\UserFunctions;
-use PHPUnit\Framework\TestCase;
-
-require_once('PDOMock.php');
-
-class UserFunctionsTest extends TestCase
+class PDOMock
 {
+    public $expectedQuery;
+    public $expectedParams;
+    public $result;
 
     // Zugriff auf Funktionen von [php 8.1.3]
-    public function testLoginSuccess()
+    public function prepare($query)
     {
-        $pdoMock = new PDOMock();
-        $pdoMock->setResult(['username' => 'testuser', 'password' => password_hash('testpassword', PASSWORD_DEFAULT)]);
-        $GLOBALS['pdo'] = $pdoMock;
-
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->login('testuser', 'testpassword');
-
-        $this->assertTrue($result);
-        $this->assertEquals('testuser', $_SESSION['user']);
-        $this->assertEquals('SELECT * FROM users WHERE username = ?', $pdoMock->expectedQuery);
-        $this->assertEquals(['testuser'], $pdoMock->expectedParams);
+        $this->expectedQuery = $query;
+        return $this;
     }
 
     // Zugriff auf Funktionen von [php 8.1.3]
-    public function testLoginFailure()
+    public function execute($params)
     {
-        $pdoMock = new PDOMock();
-        $pdoMock->setResult(false);
-        $GLOBALS['pdo'] = $pdoMock;
-
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->login('nonexistentuser', 'testpassword');
-
-        $this->assertFalse($result);
-        $this->assertArrayNotHasKey('user', array());
-        $this->assertEquals('SELECT * FROM users WHERE username = ?', $pdoMock->expectedQuery);
-        $this->assertEquals(['nonexistentuser'], $pdoMock->expectedParams);
+        $this->expectedParams = $params;
+        return $this->result;
     }
 
     // Zugriff auf Funktionen von [php 8.1.3]
-    public function testLoginWrongPassword()
+    public function fetch()
     {
-        $pdoMock = new PDOMock();
-        $pdoMock->setResult([
-            'username' => 'testuser',
-            'password' => password_hash('testpassword', PASSWORD_DEFAULT)
-        ]);
-        $GLOBALS['pdo'] = $pdoMock;
-
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->login('testuser', 'wrongpassword');
-
-        $this->assertFalse($result);
-        $this->assertArrayNotHasKey('user', array());
-        $this->assertEquals('SELECT * FROM users WHERE username = ?', $pdoMock->expectedQuery);
-        $this->assertEquals(['testuser'], $pdoMock->expectedParams);
+        return $this->result;
     }
 
     // Zugriff auf Funktionen von [php 8.1.3]
-    public function testLoginUsernameNotFound()
+    public function setResult($result)
     {
-        $pdoMock = new PDOMock();
-        $pdoMock->setResult([[]]);
-        $GLOBALS['pdo'] = $pdoMock;
-
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->login('john', 'doe');
-
-        $this->assertFalse($result);
+        $this->result = $result;
     }
 
     // Zugriff auf Funktionen von [php 8.1.3]
-    public function testLoginInputValidation()
+    public function rowCount()
     {
-        $pdoMock = new PDOMock();
-        $pdoMock->setResult([['username' => 'john', 'password' => '$2y$10$1bv.xV/I1g.L5PycRf.oMOOmZtBd0zB3q2QMv5eRz5X5ifxEjK5le']]);
-        $GLOBALS['pdo'] = $pdoMock;
-
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->login('', '');
-
-        $this->assertFalse($result);
+        return count($this->result);
     }
-
-    // Zugriff auf Funktionen von [php 8.1.3]
-    public function testLoginSessionVariableSet()
-    {
-        $pdoMock = new PDOMock();
-        $pdoMock->setResult([['username' => 'john', 'password' => '$2y$10$1bv.xV/I1g.L5PycRf.oMOOmZtBd0zB3q2QMv5eRz5X5ifxEjK5le']]);
-        $GLOBALS['pdo'] = $pdoMock;
-
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->login('john', 'doe');
-
-        $this->assertFalse($result);
-    }
-
-    // Zugriff auf Funktionen von [php 8.1.3]
-    public function testRegisterSuccess()
-    {
-        $pdoMock = new PDOMock();
-        $pdoMock->setResult([]);
-        $GLOBALS['pdo'] = $pdoMock;
-
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->register('john', 'john@example.com', 'doe', 'doe', 'John', 'Doe');
-
-        $this->assertTrue($result);
-    }
-
-    // Zugriff auf Funktionen von [php 8.1.3]
-    public function testRegisterUsernameAlreadyInUse()
-    {
-        $pdoMock = new PDOMock();
-        $pdoMock->setResult([['username' => 'john']]);
-        $GLOBALS['pdo'] = $pdoMock;
-
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->register('john', 'john@example.com', 'doe', 'doe', 'John', 'Doe');
-
-        $this->assertFalse($result);
-    }
-
-    // Zugriff auf Funktionen von [php 8.1.3]
-    public function testRegisterEmailAlreadyInUse()
-    {
-        $pdoMock = new PDOMock();
-        $pdoMock->setResult([['email' => 'john@example.com']]);
-        $GLOBALS['pdo'] = $pdoMock;
-
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->register('john', 'john@example.com', 'doe', 'doe', 'John', 'Doe');
-
-        $this->assertFalse($result);
-    }
-
-    // Zugriff auf Funktionen von [php 8.1.3]
-    public function testRegisterPasswordMismatch()
-    {
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->register('john', 'john@example.com', 'doe', 'doe1', 'John', 'Doe');
-
-        $this->assertFalse($result);
-    }
-
-    // Zugriff auf Funktionen von [php 8.1.3]
-    public function testRegisterInputValidationFail()
-    {
-        $userFunctions = new UserFunctions();
-        $result = $userFunctions->register('', '', '', '', 'John', 'Doe');
-
-        $this->assertFalse($result);
-    }
-
 }
 
 ?>
