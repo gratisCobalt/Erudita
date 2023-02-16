@@ -165,7 +165,7 @@ class UserFunctionsTest extends TestCase
         $result = $userFunctions->login('nonexistentuser', 'testpassword');
 
         $this->assertFalse($result);
-        $this->assertArrayNotHasKey('user', array());
+        $this->assertFalse(isset($_SESSION['user']));
         $this->assertEquals('SELECT * FROM users WHERE username = ?', $pdoMock->expectedQuery);
         $this->assertEquals(['nonexistentuser'], $pdoMock->expectedParams);
     }

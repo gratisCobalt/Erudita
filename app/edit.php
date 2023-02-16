@@ -109,7 +109,7 @@ $keyword = $isEditMode ? 'Edit' : 'Create';
 if ($isEditMode) {
     if (!$articleFunctions->isValidArticleId($_GET['id'])) {
         // header('Location: index.php');
-  echo "<script>window.location.href='index.php'</script>";
+        echo "<script>window.location.href='index.php'</script>";
     }
 }
 
@@ -289,7 +289,7 @@ $categories = $categoryFunctions->getCategories();
                     if (strcmp($user['role'], 'admin') == 0) {
                         // <!-- Bezugnahme auf Design-Elemente von [Bootstrap 4.5.3]. -->
                         echo '<a href="index.php"><button type="button" class="btn btn-danger btn-sm"
-                        onclick="' . $articleFunctions->deleteArticle($_GET['id']) . '">Delete article</button></a>';
+                        onclick="$articleFunctions->deleteArticle($_GET[\'id\'])">Delete article</button></a>'; //! use ajax to call php function
                     }
                 }
             }

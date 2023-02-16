@@ -103,13 +103,19 @@
 ?>
 
 <style>
-    ::-webkit-scrollbar {
+    * ::-webkit-scrollbar {
         width: 12px;
-        background-color: #F5F5F5;
     }
 
-    ::-webkit-scrollbar-thumb {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-        background-color: #555;
+    * ::-webkit-scrollbar * {
+        background: transparent;
+    }
+
+    * ::-webkit-scrollbar-thumb {
+        background: linear-gradient(0deg,
+                rgba(118, 100, 69, 1) 0%,
+                rgba(196, 172, 119, 1) 50%,
+                rgba(118, 100, 69, 1) 100%) !important;
+        border-radius: 6px;
     }
 </style>
